@@ -1,0 +1,11 @@
+@MediatorExamples_HostAddress = http://localhost:5260
+
+GET {{MediatorExamples_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{MediatorExamples_HostAddress}}/todos/1
+Accept: application/json
+
+###
