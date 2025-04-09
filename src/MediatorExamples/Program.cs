@@ -1,13 +1,21 @@
 using System.Text.Json.Serialization;
 
-var builder = WebApplication.CreateSlimBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
 });
 
+// Add Swagger Endpoints
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
+
+// Expose Swagger In
+app.UseSwagger();
+app.UseSwaggerUI();
 
 var sampleTodos = new Todo[] {
     new(1, "Walk the dog"),

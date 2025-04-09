@@ -1,0 +1,53 @@
+# Visual Studio files
+.vs/
+*/.vs/
+**/.vs/
+**/*.vsidx
+**/*.suo
+**/*.user
+**/*.userosscache
+**/*.sln.docstates
+
+# Visual Studio build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!*.[Cc]ache/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/, which is used as an MSBuild target
+!**/packages/build/
+# If using the old MSBuild-Integrated Package Restore, uncomment this:
+#!**/packages/repositories.config
+
+# User-specific files
+*.rsuser
+
+# Visual Studio code coverage results
+*.coverage
+*.coveragexml
+
+# Rider
+.idea/
+
