@@ -2,19 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>MediatorExamples_Application</RootNamespace>
+    <RootNamespace>MediatorExamples_Db</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\domain\MediatorExamples-Domain\MediatorExamples-Domain.csproj" />
-    <ProjectReference Include="..\..\infrastructure\MediatorExamples-Db\MediatorExamples-Db.csproj" />
   </ItemGroup>
 
 </Project>

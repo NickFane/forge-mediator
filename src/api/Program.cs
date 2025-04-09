@@ -1,7 +1,12 @@
+using MediatorExamples_Application;
+using MediatorExamples_Application.Services.GetBreeds;
+using MediatorExamples_Application.Services.GetBreedsBySpecies;
+using MediatorExamples_Domain.Models;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json.Serialization;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
@@ -12,34 +17,30 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+Bootstrap.BootstrapApplication(builder.Services);
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+
 var app = builder.Build();
 
-// Expose Swagger In
+var mediatr = app.Services.GetRequiredService<IMediator>();
+
+// Expose Swagger
 app.UseSwagger();
 app.UseSwaggerUI();
 
-var sampleBreeds = new Breed[] {
-    new("Maine Coon", Species.Cat),
-    new("Labrador", Species.Dog),
-    new("Blue Cattle", Species.Dog),
-    new("Domestic Short Hair", Species.Cat),
-};
-
+// Map endpoints
 var breedsApi = app.MapGroup("/breeds");
-breedsApi.MapGet("/", () => sampleBreeds);
+breedsApi.MapGet("/", () => mediatr.Send(new GetBreedsRequest()));
+breedsApi.MapGet("/{species}", (string species) => mediatr.Send(new GetBreedsBySpeciesRequest(species)));
 
 app.Run();
 
-public record Breed(string name, string species);
 
-[JsonSerializable(typeof(Breed[]))]
+[JsonSerializable(typeof(IList<Breed>))]
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {
 
 }
 
-public static class Species
-{
-    public static string Dog = "Dog";
-    public static string Cat = "Cat";
-}
